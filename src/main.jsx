@@ -11,6 +11,7 @@ import Login from './components/Login/Login.jsx'
 import Register from './components/Register/Register.jsx'
 import Slider from './components/Slider/Slider.jsx'
 import About from './components/About/About.jsx'
+import Contact from './components/Contact/Contact.jsx'
 
 
 const router = createBrowserRouter(
@@ -38,6 +39,10 @@ const router = createBrowserRouter(
         {
           path: '/about',
           element: <About></About>
+        },
+        {
+          path: '/contact',
+          element: <Contact></Contact>
         }
       ]
     }
