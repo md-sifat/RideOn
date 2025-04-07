@@ -10,6 +10,7 @@ import Private from './components/Private/Private.jsx'
 import Login from './components/Login/Login.jsx'
 import Register from './components/Register/Register.jsx'
 import Slider from './components/Slider/Slider.jsx'
+import About from './components/About/About.jsx'
 
 
 const router = createBrowserRouter(
@@ -33,6 +34,10 @@ const router = createBrowserRouter(
         {
           path: '/addCar',
           element:   <Private> <AddCars>  </AddCars> </Private>
+        },
+        {
+          path: '/about',
+          element: <About></About>
         }
       ]
     }
