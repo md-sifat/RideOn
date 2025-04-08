@@ -172,12 +172,7 @@ const Slider = () => {
                   <p className="text-gray-400">
                     {getDaysSincePosted(car.bookingCount)}
                   </p>
-                  <Link
-                    to={`/cars/${car.vehicleRegNumber}`}
-                    className="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-                  >
-                    Book Now
-                  </Link>
+                 
                 </div>
               </div>
             ))}
@@ -209,7 +204,7 @@ const Slider = () => {
                 <h3 className="text-2xl font-semibold mb-4">{offer.title}</h3>
                 <p className="text-gray-300 mb-6">{offer.description}</p>
                 <Link
-                  to="/offers"
+                  to="/cars"
                   className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700"
                 >
                   {offer.buttonText}
