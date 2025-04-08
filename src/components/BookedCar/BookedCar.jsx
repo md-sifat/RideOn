@@ -7,9 +7,10 @@ import 'react-toastify/dist/ReactToastify.css';
 const BookedCar = () => {
   const { user } = useContext(authContext);
   const [bookings, setBookings] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); 
   const [error, setError] = useState(null);
   const [sortOption, setSortOption] = useState('');
+  const [updatingId, setUpdatingId] = useState(null); 
 
   // Fetch user bookings
   useEffect(() => {
@@ -34,6 +35,7 @@ const BookedCar = () => {
   }, [user]);
 
   const handleStatusUpdate = async (bookingId, carId, newStatus) => {
+    setUpdatingId(bookingId); // Start loading for this booking
     try {
       // Update booking status
       const bookingResponse = await fetch(`https://ride-on-server.vercel.app/bookings/${bookingId}`, {
@@ -60,6 +62,7 @@ const BookedCar = () => {
         const carData = await carResponse.json();
         const newBookingCount = (carData.bookingCount || 0) + 1;
 
+        // Update car with PUT request
         const updateCarResponse = await fetch(`https://ride-on-server.vercel.app/cars/${carId}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
@@ -89,6 +92,8 @@ const BookedCar = () => {
     } catch (err) {
       toast.error(`Error updating booking: ${err.message}`);
       console.error('Status update error:', err);
+    } finally {
+      setUpdatingId(null); 
     }
   };
 
@@ -150,11 +155,11 @@ const BookedCar = () => {
       {bookings.length === 0 ? (
         <p className="text-center text-gray-300">You haven’t booked any cars yet.</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {bookings.map((booking) => (
             <div
               key={booking._id}
-              className="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
+              className="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow relative"
             >
               <img
                 src={booking.image}
@@ -188,19 +193,30 @@ const BookedCar = () => {
                   <div className="flex space-x-4">
                     <button
                       onClick={() => handleStatusUpdate(booking._id, booking.carId, 'confirmed')}
-                      className="inline-block bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
+                      disabled={updatingId === booking._id}
+                      className={`inline-block bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition ${
+                        updatingId === booking._id ? 'opacity-50 cursor-not-allowed' : ''
+                      }`}
                     >
-                      Confirm
+                      {updatingId === booking._id ? 'Confirming...' : 'Confirm'}
                     </button>
                     <button
                       onClick={() => handleStatusUpdate(booking._id, booking.carId, 'cancelled')}
-                      className="inline-block bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
+                      disabled={updatingId === booking._id}
+                      className={`inline-block bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition ${
+                        updatingId === booking._id ? 'opacity-50 cursor-not-allowed' : ''
+                      }`}
                     >
-                      Cancel
+                      {updatingId === booking._id ? 'Cancelling...' : 'Cancel'}
                     </button>
                   </div>
                 )}
               </div>
+              {updatingId === booking._id && (
+                <div className="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+                  <div className="w-8 h-8 border-4 border-t-4 border-t-blue-500 border-gray-300 rounded-full animate-spin"></div>
+                </div>
+              )}
             </div>
           ))}
         </div>
