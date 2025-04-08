@@ -83,7 +83,7 @@ const Login = () => {
                     </button>
                 </div>
                 <div className="flex flex-col items-center mt-4">
-                    <Link to={'/forgotpassword'} className="text-blue-400 hover:underline">
+                    <Link to={'/login'} className="text-blue-400 hover:underline">
                         Forgot Password?
                     </Link>
                     <Link to={'/register'} className="text-white font-medium py-3 hover:text-blue-400">

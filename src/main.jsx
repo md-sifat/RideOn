@@ -12,6 +12,8 @@ import Register from './components/Register/Register.jsx'
 import Slider from './components/Slider/Slider.jsx'
 import About from './components/About/About.jsx'
 import Contact from './components/Contact/Contact.jsx'
+import MyCars from './components/MyCar/MyCar.jsx'
+import UpdateCar from './components/UpdateCar/UpdateCar.jsx'
 
 
 const router = createBrowserRouter(
@@ -42,10 +44,18 @@ const router = createBrowserRouter(
         },
         {
           path: '/contact',
-          element: <Contact></Contact>
+          element: <Contact></Contact> 
+        },
+        {
+          path: '/mycars',
+          element: <Private> <MyCars></MyCars> </Private> 
+        },
+        {
+          path : "/update-car/:id",
+          element : <Private> <UpdateCar></UpdateCar> </Private>
+        },
+        
 
-          
-        }
       ]
     }
   ]

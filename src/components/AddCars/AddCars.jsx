@@ -44,7 +44,7 @@ const AddCars = () => {
             .then((response) => response.json())
             .then((data) => {
                 toast.success("Car added successfully!");
-                navigate("/addCars"); 
+                navigate("/addCar"); 
             })
             .catch((error) => {
                 toast.error("Failed to add car!");
