@@ -15,6 +15,7 @@ import Contact from './components/Contact/Contact.jsx'
 import MyCars from './components/MyCar/MyCar.jsx'
 import UpdateCar from './components/UpdateCar/UpdateCar.jsx'
 import Cars from './components/Cars/Cars.jsx'
+import BookedCar from './components/BookedCar/BookedCar.jsx'
 
 
 const router = createBrowserRouter(
@@ -59,6 +60,10 @@ const router = createBrowserRouter(
           path : "/cars",
           element : <Cars> </Cars>
         },
+        {
+          path : "/booking",
+          element : <Private> <BookedCar></BookedCar> </Private>
+        }
         
 
       ]

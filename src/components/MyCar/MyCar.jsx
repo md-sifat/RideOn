@@ -113,7 +113,7 @@ const MyCars = () => {
       {myCars.length === 0 ? (
         <p className="text-center text-gray-300">You haven’t added any cars yet.</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {myCars.map((car) => (
             <div
               key={car._id}
