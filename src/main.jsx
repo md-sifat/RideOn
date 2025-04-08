@@ -14,6 +14,7 @@ import About from './components/About/About.jsx'
 import Contact from './components/Contact/Contact.jsx'
 import MyCars from './components/MyCar/MyCar.jsx'
 import UpdateCar from './components/UpdateCar/UpdateCar.jsx'
+import Cars from './components/Cars/Cars.jsx'
 
 
 const router = createBrowserRouter(
@@ -53,6 +54,10 @@ const router = createBrowserRouter(
         {
           path : "/update-car/:id",
           element : <Private> <UpdateCar></UpdateCar> </Private>
+        },
+        {
+          path : "/cars",
+          element : <Cars> </Cars>
         },
         
 
